@@ -100,8 +100,10 @@ module Rack
         port.to_i
       elsif @env.has_key?("HTTP_X_FORWARDED_HOST")
         DEFAULT_PORTS[scheme]
-      else
+      elsif @env.has_key?('SERVER_PORT')
         @env["SERVER_PORT"].to_i
+      else
+        DEFAULT_PORTS[scheme]
       end
     end
 
